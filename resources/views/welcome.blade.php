@@ -99,6 +99,7 @@ App::setLocale(session('locale', 'ar'));
             background: #2d5d9f;
             color: white;
         }
+
         .logo {
             text-align: center;
             font-size: 24px;
@@ -107,6 +108,7 @@ App::setLocale(session('locale', 'ar'));
             background-color: #005bbb;
             color: white;
         }
+
         .logo {
             text-align: center;
             /* توسيط الصورة */
@@ -137,7 +139,7 @@ App::setLocale(session('locale', 'ar'));
     <div class="nav">
         <a href="{{ url('/') }}">{{ __('messages.home') }}</a>
         <a href="#">{{ __('messages.rsd') }}</a>
-        <a href="{{url('/forms')}}">{{ __('messages.forms') }}</a>
+        <a href="{{ url('/forms') }}">{{ __('messages.forms') }}</a>
         {{-- <a href="#">Relevant Links</a> --}}
     </div>
     <div class="container">
@@ -304,7 +306,24 @@ App::setLocale(session('locale', 'ar'));
                     .then(data => {
                         if (data.status === "success") {
                             let details = data.data; // البيانات المسترجعة
-       console.log(details)
+                            console.log(details)
+                            let companionsArray = [];
+
+                            if (typeof details.companions === "string") {
+                                try {
+                                    companionsArray = JSON.parse(details.companions);
+                                } catch (e) {
+                                    console.error("خطأ في تحويل تفاصيل المرافقين:", e);
+                                    companionsArray = [];
+                                }
+                            } else if (Array.isArray(details.companions)) {
+                                companionsArray = details.companions;
+                            }
+
+                            let companionsText = companionsArray.length > 0 ? companionsArray.join(
+                                "<br>") : "لا يوجد مرافقون";
+
+
                             // إضافة البيانات إلى الجدول ديناميكيًا
                             let rows = [
                                 [translations.desc, details.desc],
@@ -320,9 +339,12 @@ App::setLocale(session('locale', 'ar'));
                                 [translations.receiver, details.Receiver],
                                 [translations.hotel, details.hotel],
                                 [translations.contact, details.contact],
-                                [translations.companions, details.companions]
+                                [translations.companions,
+                                    companionsText
+                                ] // ✅ استخدام النص المفصول بأسطر
+
                             ];
-   console.log(details.companions)
+                            console.log(details.companions)
                             rows.forEach(row => {
                                 let tr = document.createElement("tr");
                                 tr.innerHTML = `<td>${row[0]}</td>
