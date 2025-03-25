@@ -57,7 +57,10 @@
             </div>
             <div class="col-md-6 mx-auto">
                 <div class="registration-form">
-
+ 
+                   @if (session('error'))
+                  <p style="text-align:  center ; color: red;" >{{ session('error') }} </p> 
+                   @endif
                     <form action="{{route('admin.login')}}" method="POST">
                         @csrf
                         <h4 class="text-center header" style="color: black;">تسجيل الدخول</h4>

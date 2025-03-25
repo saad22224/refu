@@ -36,9 +36,15 @@ class CodeFactory extends Factory
                 $this->faker->company() . ' منتجع',
                 $this->faker->company() . ' نزل',
                 $this->faker->company() . ' بيت ضيافة',
-            ], 
+            ],
 
             'contact' => $this->faker->phoneNumber(),
+            'text' => $this->faker->paragraph(),
+            'images' => [
+                'https://via.placeholder.com/150',
+                'https://via.placeholder.com/150',
+                'https://via.placeholder.com/150',
+            ],
         ];
     }
 }

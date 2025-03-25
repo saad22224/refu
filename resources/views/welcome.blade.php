@@ -124,6 +124,57 @@ App::setLocale(session('locale', 'ar'));
             display: block;
             margin: 0 auto;
         }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px dotted #FFF;
+            border-style: solid solid dotted dotted;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 2s linear infinite;
+           transform: translateY(500%);
+        }
+
+        .loader::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border: 3px dotted #FF3D00;
+            border-style: solid solid dotted;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            animation: rotationBack 1s linear infinite;
+            transform-origin: center center;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotationBack {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
     </style>
 </head>
 
@@ -222,7 +273,14 @@ App::setLocale(session('locale', 'ar'));
                 <td>+201145691406</td>
             </tr>
         </table>
+       
+        <!-- حاوية النص والصور -->
+        <div id="textAndImages" style="display: none; margin-top: 20px;">
+            <p id="text"></p>
+            <div id="imagesContainer"></div>
+        </div>
     </div>
+    <span class="loader" style="display: none"></span>
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchBtn").addEventListener("click", function() {
@@ -282,6 +340,8 @@ App::setLocale(session('locale', 'ar'));
 
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchBtn").addEventListener("click", function() {
+                let loader = document.querySelector(".loader");
+                loader.style.display = "inline-block"; // عرض الرمز التحميل
                 let code = document.getElementById("case").value;
                 let errorMsg = document.getElementById("errorMsg");
                 let resultTable = document.getElementById("resultTable");
@@ -290,6 +350,9 @@ App::setLocale(session('locale', 'ar'));
                 errorMsg.style.display = "none"; // إخفاء رسالة الخطأ
                 resultTable.style.display = "none"; // إخفاء الجدول
                 tableBody.innerHTML = ""; // مسح أي بيانات سابقة
+
+                // إخفاء حاوية النص والصور
+                document.getElementById("textAndImages").style.display = "none";
 
                 fetch("/api/search", {
                         method: "POST",
@@ -305,7 +368,11 @@ App::setLocale(session('locale', 'ar'));
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === "success") {
-                            let details = data.data; // البيانات المسترجعة
+                            let details = data.data; 
+                            setTimeout(() => {
+                                loader.style.display = "none"; // إخفاء الرمز التحميل
+                            }, 5000);
+                        //    loader.style.display = "none"; // إخفاء الرمز التحميل
                             console.log(details)
                             let companionsArray = [];
 
@@ -323,7 +390,6 @@ App::setLocale(session('locale', 'ar'));
                             let companionsText = companionsArray.length > 0 ? companionsArray.join(
                                 "<br>") : "لا يوجد مرافقون";
 
-
                             // إضافة البيانات إلى الجدول ديناميكيًا
                             let rows = [
                                 [translations.desc, details.desc],
@@ -339,20 +405,53 @@ App::setLocale(session('locale', 'ar'));
                                 [translations.receiver, details.Receiver],
                                 [translations.hotel, details.hotel],
                                 [translations.contact, details.contact],
-                                [translations.companions,
-                                    companionsText
-                                ] // ✅ استخدام النص المفصول بأسطر
-
+                                [translations.companions, companionsText]
                             ];
-                            console.log(details.companions)
+
                             rows.forEach(row => {
                                 let tr = document.createElement("tr");
-                                tr.innerHTML = `<td>${row[0]}</td>
-    <td>${row[1]}</td>`;
+                                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
                                 tableBody.appendChild(tr);
                             });
+               setTimeout(() => {
+                resultTable.style.display = "table"; // عرض الجدول
+                            }, 5000);
+                           
 
-                            resultTable.style.display = "table"; // إظهار الجدول بعد ملئه
+                            // عرض النص تحت الجدول
+                            document.getElementById("text").innerText = details.text || "";
+
+                            // معالجة الصور من JSON (قد تكون سلسلة أو مصفوفة)
+                            let imagesArray = [];
+                            if (details.images) {
+                                if (typeof details.images === "string") {
+                                    try {
+                                        imagesArray = JSON.parse(details.images);
+                                    } catch (e) {
+                                        console.error("خطأ في تحويل بيانات الصور:", e);
+                                        imagesArray = [];
+                                    }
+                                } else if (Array.isArray(details.images)) {
+                                    imagesArray = details.images;
+                                }
+                            }
+
+                            // تعبئة حاوية الصور
+                            let imagesContainer = document.getElementById("imagesContainer");
+                            imagesContainer.innerHTML = ""; // مسح المحتوى السابق
+                            imagesArray.forEach(url => {
+                                let img = document.createElement("img");
+                                img.src = url;
+                                img.style.width = "150px"; // تعديل الحجم حسب الحاجة
+                                img.style.margin = "10px";
+                                imagesContainer.appendChild(img);
+                            });
+
+                          setTimeout(() => {
+                                document.getElementById("textAndImages").style.display = "block";
+                            }, 5000);
+                            // document.getElementById("textAndImages").style.display = "block";
+
                         } else {
                             errorMsg.textContent = "لا يوجد نتيجة";
                             errorMsg.style.display = "block";
@@ -366,6 +465,7 @@ App::setLocale(session('locale', 'ar'));
             });
         });
     </script>
+
 
 </body>
 

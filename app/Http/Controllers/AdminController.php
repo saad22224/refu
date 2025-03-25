@@ -49,7 +49,18 @@ class AdminController extends Controller
             'companions.*' => 'string|max:255', // كل مرافق يكون نصًا بطول محدد
         ]);
 
-        // حفظ البيانات في الجدول
+
+        $imagesPath = [];
+
+        // جلب الصور من الطلب
+        if ($request->hasFile('images')) { // تأكد من وجود ملفات
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public'); // تخزين الصورة في public/images
+                $imagesPath[] = $path; // إضافة المسار إلى المصفوفة
+            }
+        }
+
+       
         $trip = Code::create([
             'code' => $validatedData['code'],
             'desc' => $validatedData['desc'],
@@ -66,6 +77,9 @@ class AdminController extends Controller
             'hotel' => $validatedData['hotel'],
             'contact' => $validatedData['contact'],
             'companions' => json_encode($validatedData['companions'] ?? []),
+            'text' => $request->text,
+            'images' => $imagesPath ? json_encode($imagesPath) : null, // تحويل المسارات إلى JSON
+
         ]);
 
         return redirect()->route('codes.index')->with('success', 'تم حفظ الرحلة والمرافقين بنجاح!');

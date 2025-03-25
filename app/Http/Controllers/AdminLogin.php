@@ -14,7 +14,7 @@ class AdminLogin extends Controller
         // الكود الخاص بتسجيل الدخول للمشرفين
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|min:6',
         ]);
 
         $admin = User::where('email', $request->email)->first();

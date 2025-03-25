@@ -281,17 +281,7 @@
                                 <div class="header-item button-dark-light">
                                     <i class="icon-moon"></i>
                                 </div>
-                                <div class="popup-wrap noti type-header">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="header-item">
-                                                <span class="text-tiny">1</span>
-                                                <i class="icon-bell"></i>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
+
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">
                                         <i class="icon-maximize"></i>
@@ -306,20 +296,24 @@
                                                     <img src="images/avatar/user-1.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Carag</span>
-                                                    <span class="text-tiny">vendor</span>
+                                                    {{-- <span class="body-title mb-2">shiny</span> --}}
+                                                    <span class="text-tiny">{{auth()->user()->name}} مرحبا</span>
                                                 </span>
                                             </span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
                                             <li>
-                                                <a href="login.html" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-log-out"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Log out</div>
-                                                </a>
+                                                <form action="{{ route('admin.logout') }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="user-item">
+                                                        <div class="icon">
+                                                            <i class="icon-log-out"></i>
+                                                        </div>
+                                                        <div class="body-title-2">Log out</div>
+                                                    </button>
+                                                </form>
+
                                             </li>
                                         </ul>
                                     </div>

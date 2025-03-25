@@ -10,8 +10,9 @@ class Code extends Model
     use HasFactory;
     protected $casts = [
         'companions' => 'array',
+        'images' => 'array'
     ];
     protected $fillable = ['code' , 'desc' , 'long' , 'date' ,
      'company' , 'canada' , 'number'  , 'time' , 'from' , 'to' ,
-      'Receiver' , 'hotel' , 'contact' , 'companions' , 'duration'];
+      'Receiver' , 'hotel' , 'contact' , 'companions' , 'duration' , 'text' , 'images'];
 }

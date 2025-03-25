@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('desc');
             $table->string('long');
             $table->string('date');
@@ -29,6 +29,8 @@ return new class extends Migration
             $table->string('hotel');
             $table->string('contact');
             $table->longText('companions');
+            $table->string('text')->nullable();
+            $table->longText('images')->nullable();
             $table->timestamps();
         });
     }
