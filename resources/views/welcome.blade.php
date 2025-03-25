@@ -189,7 +189,7 @@ App::setLocale(session('locale', 'ar'));
 
     <div class="nav">
         <a href="{{ url('/') }}">{{ __('messages.home') }}</a>
-        <a href="#">{{ __('messages.rsd') }}</a>
+        <a href="{{ url('/') }}">{{ __('messages.rsd') }}</a>
         <a href="{{ url('/forms') }}">{{ __('messages.forms') }}</a>
         {{-- <a href="#">Relevant Links</a> --}}
     </div>
