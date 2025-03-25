@@ -277,7 +277,7 @@ App::setLocale(session('locale', 'ar'));
         <!-- حاوية النص والصور -->
         <div id="textAndImages" style="display: none; margin-top: 20px;">
             <p id="text"></p>
-            <div id="imagesContainer"></div>
+            <div id="imagesContainer" style="max-height: 200px"></div>
         </div>
     </div>
     <span class="loader" style="display: none"></span>
