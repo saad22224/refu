@@ -61,7 +61,7 @@ App::setLocale(session('locale', 'ar'));
         label,
         input {
             display: block;
-            width: 100%;
+            width: 90%;
             padding: 10px;
         }
 
@@ -203,7 +203,7 @@ App::setLocale(session('locale', 'ar'));
             <label for="case">{{ __('messages.unhcr') }}</label>
             <input type="text" id="case">
         </div>
-        <button id="searchBtn">{{ __('messages.search') }}</button>
+        <button id="searchBtn" >{{ __('messages.search') }}</button>
         <p id="errorMsg" style="color: red; display: none;"></p>
 
 
@@ -281,7 +281,10 @@ App::setLocale(session('locale', 'ar'));
         </div>
     </div>
     <span class="loader" style="display: none"></span>
-    {{-- <script>
+    <div class="hometext" style="font-size: 16px; font-weight: bold; text-align: center; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+        {{ __('messages.description') }}
+    </div>
+        {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchBtn").addEventListener("click", function() {
                 let code = document.getElementById("case").value;
@@ -341,6 +344,7 @@ App::setLocale(session('locale', 'ar'));
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchBtn").addEventListener("click", function() {
                 let loader = document.querySelector(".loader");
+                document.querySelector('.hometext').style.display = "none";
                 loader.style.display = "inline-block"; // عرض الرمز التحميل
                 let code = document.getElementById("case").value;
                 let errorMsg = document.getElementById("errorMsg");
@@ -455,6 +459,8 @@ App::setLocale(session('locale', 'ar'));
                         } else {
                             errorMsg.textContent = "لا يوجد نتيجة";
                             errorMsg.style.display = "block";
+                            loader.style.display = "none";
+                            document.querySelector('.hometext').style.display = "block";
                         }
                     })
                     .catch(error => {

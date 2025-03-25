@@ -26,7 +26,8 @@ return [
     'contact' => 'contact',
     'companions' => 'companions',
     'title' => 'UNHCR Canada Office',
-    'description' => 'This website provides asylum applicants with a secure way to access the status of their refugee status determination process.',
+    'description' => 'This website provides asylum applicants with a secure way to access the status of their refugee status determination process.
+For  further information on the RSD process in CANADA, kindly go through the questions and answers listed on the UNHCR CANADA',
     'info' => 'For further information on the RSD process in CANADA, kindly go through the questions and answers listed on the UNHCR CANADA Office contact details:',
     'rep_title' => 'The UNHCR Representative in Canada',
     'address' => 'Street and mailing address:',
