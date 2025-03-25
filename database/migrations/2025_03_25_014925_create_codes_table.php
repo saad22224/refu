@@ -20,14 +20,15 @@ return new class extends Migration
             $table->string('company');
             $table->string('canada');
             $table->string('number');
-            $table->string('Arrival');
+            // $table->string('Arrival');
             $table->string('time');
             $table->string('from');
             $table->string('to');
+            $table->string('duration');
             $table->string('Receiver');
             $table->string('hotel');
             $table->string('contact');
-            $table->string('companions');
+            $table->longText('companions');
             $table->timestamps();
         });
     }

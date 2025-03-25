@@ -53,86 +53,114 @@
                 <!-- section-menu-left -->
                 <div class="section-menu-left">
                     <div class="box-logo">
-                        <a href="index.html" id="site-logo-inner">
+                        <a href="{{route('dashboard')}}" id="site-logo-inner">
                             <img class="" alt="" src="" data-light="" data-dark="">
                         </a>
                         <div class="button-show-hide">
                             <i class="icon-menu-left"></i>
                         </div>
                     </div>
-                    <div class="section-menu-left">
-                        <div class="box-logo">
-                            <a href="index.html" id="site-logo-inner">
-                                <img class="" alt="" src="" data-light="" data-dark="">
-                            </a>
-                            <div class="button-show-hide">
-                                <i class="icon-menu-left"></i>
+                    <div class="section-menu-left-wrap">
+                        <div class="center">
+                            <div class="center-item">
+                                <div class="center-heading">الرئيسية </div>
+                                <ul class="menu-list">
+                                    <li class="menu-item has-children active">
+                                        <a href="javascript:void(0);" class="menu-item-button">
+                                            <div class="icon"><i class="icon-grid"></i></div>
+                                            <div class="text">لوحة التحكم </div>
+                                        </a>
+                                        <ul class="sub-menu" style="display: block;">
+                                            <li class="sub-menu-item">
+                                                <a href="{{route('dashboard')}}" class="active">
+                                                    <div class="text">الرئيسية</div>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="section-menu-left-wrap">
-                            <div class="center">
-                                <div class="center-item">
-                                    <div class="center-heading">الرئيسية </div>
-                                    <ul class="menu-list">
-                                        <li class="menu-item has-children ">
-                                            <a href="javascript:void(0);" class="menu-item-button">
-                                                <div class="icon"><i class="icon-grid"></i></div>
-                                                <div class="text">لوحة التحكم </div>
-                                            </a>
-                                            <ul class="sub-menu" style="display: block;">
-                                                <li class="sub-menu-item">
-                                                    <a href="index.html" class="">
-                                                        <div class="text">الرئيسية</div>
-                                                    </a>
-                                                </li>
+                            <div class="center-item">
+                                <div class="center-heading">التحكمات</div>
+                                <ul class="menu-list">
+                                    <li class="menu-item has-children">
+                                        <a href="javascript:void(0);" class="menu-item-button">
+                                            <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                            <div class="text">الصفحات</div>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="sub-menu-item">
+                                                <a href="{{url('admincode')}}" class="">
+                                                    <div class="text"> اضافة كود </div>
+                                                </a>
+                                            </li>
+                                           <li class="sub-menu-item">
+                                                <a href="{{route('codes.index')}}" class="">
+                                                    <div class="text">قائمة الرحلات</div>
+                                                </a>
+                                            </li>
+                                             {{-- <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">ادارة حسابات التواصل الاجتماعي</div>
+                                                </a>
+                                            </li>
 
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="center-item">
-                                    <div class="center-heading">التحكمات</div>
-                                    <ul class="menu-list">
-                                        <li class="menu-item has-children active">
-                                            <a href="javascript:void(0);" class="menu-item-button">
-                                                <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                                <div class="text">المتجر</div>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="sub-menu-item">
-                                                    <a href="add-product.html" class="active">
-                                                        <div class="text">اضافة منتج</div>
-                                                    </a>
-                                                </li>
-                                                <li class="sub-menu-item">
-                                                    <a href="product-list.html" class="">
-                                                        <div class="text">المنتجات</div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item has-children">
-                                            <a href="javascript:void(0);" class="menu-item-button">
-                                                <div class="icon"><i class="icon-file-plus"></i></div>
-                                                <div class="text">الطلبات</div>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="sub-menu-item">
-                                                    <a href="oder-list.html" class="">
-                                                        <div class="text">الطلبات المرسلة</div>
-                                                    </a>
-                                                </li>
-                                               
-                                                <li class="sub-menu-item">
-                                                    <a href="oder-tracking.html" class="">
-                                                        <div class="text">تتبع الطلب</div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">السيو</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">كتابة المحتوي</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">الحملات الاعلانية</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">تصميم الفيديوهات الاعلانية</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">تصميم مواقع الويب</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">تصميم المتاجر الالكترونية</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text"> تصوير المنتجات</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text"> تصميم الهوية البصرية</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text"> تصميم الجرافيك</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="" class="">
+                                                    <div class="text">GTM</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> --}}
 
-                                    </ul>
-                                </div>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -272,7 +300,7 @@
                                         </tr>
                                         <tr>
                                             <td>مدة الرحلة</td>
-                                            <td><input type="text" name="Arrival" class="form-control" value="{{ old('Arrival') }}"></td>
+                                            <td><input type="text" name="duration" class="form-control" value="{{ old('Arrival') }}"></td>
                                         </tr>
                                         <tr>
                                             <td>الانطلاق</td>
@@ -298,16 +326,16 @@
                                             <td>المرافقون</td>
                                             <td>
                                                 <div id="companionsContainer">
-                                                    @if(old('Companions'))
-                                                        @foreach(old('Companions') as $companion)
+                                                    @if(old('companions'))
+                                                        @foreach(old('companions') as $companion)
                                                             <div class="input-group mb-2">
-                                                                <input type="text" name="Companions[]" class="form-control" value="{{ $companion }}">
+                                                                <input type="text" name="companions[]" class="form-control" value="{{ $companion }}">
                                                                 <button type="button" class="btn btn-danger" onclick="removeField(this)">حذف</button>
                                                             </div>
                                                         @endforeach
                                                     @else
                                                         <div class="input-group mb-2">
-                                                            <input type="text" name="Companions[]" class="form-control" placeholder="أدخل اسم المرافق">
+                                                            <input type="text" name="companions[]" class="form-control" placeholder="أدخل اسم المرافق">
                                                             <button type="button" class="btn btn-danger" onclick="removeField(this)">حذف</button>
                                                         </div>
                                                     @endif

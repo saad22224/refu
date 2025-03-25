@@ -11,5 +11,7 @@ class Code extends Model
     protected $casts = [
         'companions' => 'array',
     ];
-    protected $fillable = ['code' , 'desc' , 'long' , 'date' , 'company' , 'canada' , 'number' , 'Arrival' , 'time' , 'from' , 'to' , 'Receiver' , 'hotel' , 'contact' , 'companions'];
+    protected $fillable = ['code' , 'desc' , 'long' , 'date' ,
+     'company' , 'canada' , 'number'  , 'time' , 'from' , 'to' ,
+      'Receiver' , 'hotel' , 'contact' , 'companions' , 'duration'];
 }

@@ -313,7 +313,7 @@ App::setLocale(session('locale', 'ar'));
                                 [translations.company, details.company],
                                 [translations.canada, details.canada],
                                 [translations.number, details.number],
-                                [translations.arrival, details.Arrival],
+                                [translations.arrival, details.time],
                                 [translations.duration, details.duration],
                                 [translations.from, details.from],
                                 [translations.to, details.to],

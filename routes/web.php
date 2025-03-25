@@ -40,7 +40,7 @@ Route::post('/api/search', [CodeController::class, 'search']);
 // admin
 
 
-Route::get('/admin', function () {
+Route::get('/uniadmin', function () {
     return view('dashboard.login');
 })->name('admin');
 

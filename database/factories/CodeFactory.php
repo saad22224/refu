@@ -24,13 +24,20 @@ class CodeFactory extends Factory
             'company' => $this->faker->company(),
             'canada' => $this->faker->city(),
             'number' => $this->faker->randomNumber(8, true),
-            'Arrival' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
+            // 'Arrival' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
             'time' => $this->faker->time(),
+            'duration' => $this->faker->time(),
             'from' => $this->faker->city(),
             'to' => $this->faker->city(),
             'Receiver' => $this->faker->name(),
-            'hotel' => $this->faker->company().' Hotel',
-            'companions' => $this->faker->company().' Hotel',
+            'hotel' => $this->faker->company() . ' Hotel',
+            'companions' => [
+                $this->faker->company() . ' فندق',
+                $this->faker->company() . ' منتجع',
+                $this->faker->company() . ' نزل',
+                $this->faker->company() . ' بيت ضيافة',
+            ], 
+
             'contact' => $this->faker->phoneNumber(),
         ];
     }

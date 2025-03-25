@@ -8,7 +8,7 @@
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <title></title>
+    <title>Remos eCommerce Admin Dashboard HTML Template</title>
 
     <meta name="author" content="themesflat.com">
 
@@ -29,9 +29,9 @@
     <!-- Icon -->
     <link rel="stylesheet" href="{{ asset('admin/icon/style.css') }}">
 
-
     <!-- Favicon and Touch Icons  -->
-
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="images/favicon.png">
 
 </head>
 
@@ -44,11 +44,11 @@
             <!-- layout-wrap -->
             <div class="layout-wrap">
                 <!-- preload -->
-                <div id="preload" class="preload-container">
+                <!--   <div id="preload" class="preload-container">
                     <div class="preloading">
                         <span></span>
                     </div>
-                </div>
+                </div> -->
                 <!-- /preload -->
                 <!-- section-menu-left -->
                 <div class="section-menu-left">
@@ -185,7 +185,17 @@
                                 <div class="header-item button-dark-light">
                                     <i class="icon-moon"></i>
                                 </div>
-
+                                <div class="popup-wrap noti type-header">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="header-item">
+                                                <span class="text-tiny">1</span>
+                                                <i class="icon-bell"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">
                                         <i class="icon-maximize"></i>
@@ -200,24 +210,20 @@
                                                     <img src="images/avatar/user-1.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    {{-- <span class="body-title mb-2">shiny</span> --}}
-                                                    <span class="text-tiny">{{auth()->user()->name}} مرحبا</span>
+                                                    <span class="body-title mb-2">Carag</span>
+                                                    <span class="text-tiny">vendor</span>
                                                 </span>
                                             </span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
                                             <li>
-                                                <form action="{{ route('admin.logout') }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="user-item">
-                                                        <div class="icon">
-                                                            <i class="icon-log-out"></i>
-                                                        </div>
-                                                        <div class="body-title-2">Log out</div>
-                                                    </button>
-                                                </form>
-
+                                                <a href="login.html" class="user-item">
+                                                    <div class="icon">
+                                                        <i class="icon-log-out"></i>
+                                                    </div>
+                                                    <div class="body-title-2">Log out</div>
+                                                </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -229,29 +235,139 @@
                     <!-- main-content -->
                     <div class="main-content">
                         <!-- main-content-wrap -->
-                        <div class="main-content-inner">
-                            <!-- main-content-wrap -->
-                            <div style="color: orange;" class="text-center d-flex justify-content-center fs-1 fw-bold align-items-center col-12 vh-70">
-                                 مرحبا بك في لوحة التحكم 
-                            </div>
-                        </div>
-                        <!-- /main-content-wrap -->
-                    </div>
-                    <!-- /main-content-wrap -->
-                    <!-- bottom-page -->
+                     
+                            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+                            <script>
+                                function addCompanionField() {
+                                    var container = document.getElementById("companionsContainer");
+                                    var newInput = document.createElement("div");
+                                    newInput.classList.add("input-group", "mb-2");
+                                    newInput.innerHTML = `
+                                        <input type="text" name="companions[]" class="form-control" placeholder="أدخل اسم المرافق">
+                                        <button type="button" class="btn btn-danger" onclick="removeField(this)">حذف</button>
+                                    `;
+                                    container.appendChild(newInput);
+                                }
+                        
+                                function removeField(button) {
+                                    button.parentElement.remove();
+                                }
+                            </script>
+                        </head>
+                        <body class="container mt-4">
+                            <h2 class="text-center mb-4">إدارة بيانات الرحلة</h2>
+                            <form method="POST" action="{{ route('codes.update'  , $code->id) }}">
+                                @csrf
+                            @method('PUT')
 
-                    <!-- /bottom-page -->
+                                <table class="table table-bordered text-center">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>{{ __('messages.program') }}</th>
+                                            <th>{{ __('messages.resettlement_canada') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>الكود</td>
+                                            <td><input type="text" name="code" class="form-control" value="{{ $code->code }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ __('messages.desc') }}</td>
+                                            <td><input type="text" name="desc" class="form-control"  value="{{ $code->desc }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>طول الرحلة</td>
+                                            <td><input type="text" name="long" class="form-control"  value="{{ $code->long }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>تاريخ المغادرة</td>
+                                            <td><input type="date" name="date" class="form-control"  value="{{ $code->date }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>شركة الطيران المغادرة</td>
+                                            <td><input type="text" name="company" class="form-control"  value="{{ $code->company }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>خطوط الطيران الكندية</td>
+                                            <td><input type="text" name="canada" class="form-control"  value="{{ $code->canada }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>رقم رحلة المغادرة</td>
+                                            <td><input type="text" name="number" class="form-control" value="{{ $code->number }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>وقت الوصول</td>
+                                            <td><input type="time" name="time" class="form-control"  value="{{ $code->time }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>مدة الرحلة</td>
+                                            <td><input type="text" name="duration" class="form-control"  value="{{ $code->duration }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الانطلاق</td>
+                                            <td><input type="text" name="from" class="form-control"  value="{{ $code->from }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الاستقبال</td>
+                                            <td><input type="text" name="to" class="form-control"  value="{{ $code->to }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>المستقبل</td>
+                                            <td><input type="text" name="Receiver" class="form-control" value="{{ $code->Receiver }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>الفندق</td>
+                                            <td><input type="text" name="hotel" class="form-control" value="{{ $code->hotel }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>جهة الاتصال الرئيسية</td>
+                                            <td><input type="text" name="contact" class="form-control"  value="{{ $code->contact }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>المرافقون</td>
+                                            <td>
+                                                <div id="companionsContainer">
+                                                 
+                                                    
+                                                            <div class="input-group mb-2">
+                                                                <input type="text" name="Companions[]" class="form-control" value="{{ $code->companions }}">
+                                                                <button type="button" class="btn btn-danger" onclick="removeField(this)">حذف</button>
+                                                            </div>
+                                                      
+                                                  
+                                                        <div class="input-group mb-2">
+                                                            <input type="text" name="Companions[]" class="form-control" placeholder="أدخل اسم المرافق">
+                                                            <button type="button" class="btn btn-danger" onclick="removeField(this)">حذف</button>
+                                                        </div>
+                                                    
+                                                </div>
+                                                <button type="button" class="btn btn-success mt-2" onclick="addCompanionField()">إضافة مرافق</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="submit" class="btn btn-primary w-100">تحديث البيانات</button>
+                            </form>
+                            
+                            
+                        </body>
+                        </html>
+                        
+                        <!-- /main-content-wrap -->
+                        <!-- bottom-page -->
+                        <!-- /bottom-page -->
+                    </div>
+                    <!-- /main-content -->
                 </div>
-                <!-- /main-content -->
+                <!-- /section-content-right -->
             </div>
-            <!-- /section-content-right -->
+            <!-- /layout-wrap -->
         </div>
-        <!-- /layout-wrap -->
-    </div>
-    <!-- /#page -->
+        <!-- /#page -->
     </div>
     <!-- /#wrapper -->
-
+  
     <!-- Javascript -->
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
@@ -267,7 +383,6 @@
     <!-- <script src="{{ asset('admin/js/switcher.js') }}"></script> -->
     <script src="{{ asset('admin/js/theme-settings.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
-
 </body>
 
 </html>
