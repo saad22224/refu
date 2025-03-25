@@ -457,7 +457,7 @@ App::setLocale(session('locale', 'ar'));
                             // document.getElementById("textAndImages").style.display = "block";
 
                         } else {
-                            errorMsg.textContent = "لا يوجد نتيجة";
+                            errorMsg.textContent = "{{__('messages.noresult')}}  ";
                             errorMsg.style.display = "block";
                             loader.style.display = "none";
                             document.querySelector('.hometext').style.display = "block";

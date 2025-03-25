@@ -43,4 +43,5 @@ For  further information on the RSD process in CANADA, kindly go through the que
     'friday' => 'Friday: 9:00 - 17:00',
     'saturday' => 'Saturday: Closed',
     'sunday' => 'Sunday: Closed',
+    'noresult' => 'No Result Found',
 ];
