@@ -64,7 +64,7 @@ class AdminController extends Controller
             'Receiver' => $validatedData['Receiver'],
             'hotel' => $validatedData['hotel'],
             'contact' => $validatedData['contact'],
-            'Companions' => json_encode($validatedData['Companions'] ?? []), // تحويل المرافقين إلى JSON
+            'companions' => json_encode($validatedData['Companions'] ?? []), // تحويل المرافقين إلى JSON
         ]);
     
         return redirect()->back()->with('success', 'تم حفظ الرحلة والمرافقين بنجاح!');
