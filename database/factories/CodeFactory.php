@@ -30,7 +30,7 @@ class CodeFactory extends Factory
             'to' => $this->faker->city(),
             'Receiver' => $this->faker->name(),
             'hotel' => $this->faker->company().' Hotel',
-            'Companions' => $this->faker->company().' Hotel',
+            'companions' => $this->faker->company().' Hotel',
             'contact' => $this->faker->phoneNumber(),
         ];
     }

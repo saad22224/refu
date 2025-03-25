@@ -304,7 +304,7 @@ App::setLocale(session('locale', 'ar'));
                     .then(data => {
                         if (data.status === "success") {
                             let details = data.data; // البيانات المسترجعة
-
+       console.log(details)
                             // إضافة البيانات إلى الجدول ديناميكيًا
                             let rows = [
                                 [translations.desc, details.desc],
@@ -314,9 +314,7 @@ App::setLocale(session('locale', 'ar'));
                                 [translations.canada, details.canada],
                                 [translations.number, details.number],
                                 [translations.arrival, details.Arrival],
-                                [translations.duration,
-                                    "نصف يوم وثلاث ساعات"
-                                ], // يمكنك استبدالها ببيانات ديناميكية
+                                [translations.duration, details.duration],
                                 [translations.from, details.from],
                                 [translations.to, details.to],
                                 [translations.receiver, details.Receiver],
@@ -324,7 +322,7 @@ App::setLocale(session('locale', 'ar'));
                                 [translations.contact, details.contact],
                                 [translations.companions, details.companions]
                             ];
-
+   console.log(details.companions)
                             rows.forEach(row => {
                                 let tr = document.createElement("tr");
                                 tr.innerHTML = `<td>${row[0]}</td>

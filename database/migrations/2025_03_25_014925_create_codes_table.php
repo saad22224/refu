@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('Receiver');
             $table->string('hotel');
             $table->string('contact');
-            $table->string('Companions');
+            $table->string('companions');
             $table->timestamps();
         });
     }

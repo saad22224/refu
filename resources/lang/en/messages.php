@@ -24,7 +24,7 @@ return [
     'receiver' => 'Receiver',
     'hotel' => 'hotel',
     'contact' => 'contact',
-    'companions' => 'Companions',
+    'companions' => 'companions',
     'title' => 'UNHCR Canada Office',
     'description' => 'This website provides asylum applicants with a secure way to access the status of their refugee status determination process.',
     'info' => 'For further information on the RSD process in CANADA, kindly go through the questions and answers listed on the UNHCR CANADA Office contact details:',

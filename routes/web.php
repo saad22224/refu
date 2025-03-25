@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\CodeController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +34,31 @@ Route::get('locale/{locale}', function ($locale) {
 
 
 Route::post('/api/search', [CodeController::class, 'search']);
+
+
+
+// admin
+
+
+Route::get('/admin', function () {
+    return view('dashboard.login');
+})->name('admin');
+
+
+
+Route::get('/dashboard', function() {
+    return view('dashboard.index');
+})->name('dashboard');
+
+
+Route::get('/admincode', function() {
+    return view('dashboard.code');
+});
+
+
+
+
+
+Route::post('/admin/login', [AdminLogin::class , 'login'])->name('admin.login');
+Route::post('/admin/logout', [AdminLogin::class , 'logout'])->name('admin.logout');
+Route::resource('codes', AdminController::class)->middleware('auth');
