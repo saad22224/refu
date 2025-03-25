@@ -11,7 +11,7 @@ class CodeController extends Controller
         $code = $request->input('code');
         $result = Code::where('code', $code)->first();
         if ($result) {
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'success' , 'data' => $result]);
         } else {
             return response()->json(['status' => 'error', 'message' => 'Code not found']);
         }

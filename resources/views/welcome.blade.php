@@ -82,18 +82,45 @@ App::setLocale(session('locale', 'ar'));
             font-size: 20px;
             width: 60%;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: right;
         }
+
         th {
             background: #2d5d9f;
             color: white;
+        }
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #005bbb;
+            color: white;
+        }
+        .logo {
+            text-align: center;
+            /* توسيط الصورة */
+            margin: 20px 0;
+            /* إضافة مسافة حول الشعار */
+            background-color: #005bbb;
+        }
+
+        .logo img {
+            width: 150px;
+            /* تعديل الحجم */
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -102,126 +129,224 @@ App::setLocale(session('locale', 'ar'));
     <div class="header">{{ __('messages.language') }}: <a style="color: white" href="{{ route('locale', 'ar') }}">
             {{ __('messages.arabic') }}</a> | <a style="color: white" href="{{ route('locale', 'en') }}">
             {{ __('messages.english') }}</a></div>
-    <div class="logo">UNHCR</div>
+    {{-- <div class="logo">UNHCR</div> --}}
+    <div class="logo">
+        <img src="{{ asset('assets\HCR.png') }}" alt="UNHCR Logo">
+    </div>
+
     <div class="nav">
-        <a href="{{url('/')}}">{{__('messages.home')}}</a>
-        <a href="#">{{__('messages.rsd')}}</a>
-        <a href="#">{{__('messages.forms')}}</a>
+        <a href="{{ url('/') }}">{{ __('messages.home') }}</a>
+        <a href="#">{{ __('messages.rsd') }}</a>
+        <a href="{{url('/forms')}}">{{ __('messages.forms') }}</a>
         {{-- <a href="#">Relevant Links</a> --}}
     </div>
     <div class="container">
-        <h2>{{__('messages.egypt')}}</h2>
+        <h2>{{ __('messages.egypt') }}</h2>
         {{-- <div class="input-group">
             <label for="dob">Date of birth</label>
             <input type="date" id="dob">
         </div> --}}
         <div class="input-group">
-            <label for="case">{{__('messages.unhcr')}}</label>
+            <label for="case">{{ __('messages.unhcr') }}</label>
             <input type="text" id="case">
         </div>
-        <button id="searchBtn">{{__('messages.search')}}</button>
+        <button id="searchBtn">{{ __('messages.search') }}</button>
         <p id="errorMsg" style="color: red; display: none;"></p>
-        
-    
-    {{-- <div class="message-box">نص ساررسله لإضافته مع صورة</div> --}}
 
-    <table id="resultTable" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"  style="display: none">
-        <tr>
-            <th>برنامج الرحلة</th>
-            <th>إعادة التوطين كندا</th>
-        </tr>
-        <tr>
-            <td> {{__('messages.desc')}}</td>
-            <td>إعادة التوطين</td>
-        </tr>
-        <tr>
-            <td>طول الرحلة</td>
-            <td>15 ساعة</td>
-        </tr>
-        <tr>
-            <td>تاريخ المغادرة</td>
-            <td>27-03-1441</td>
-        </tr>
-        <tr>
-            <td>شركة الطيران المغادرة</td>
-            <td>المصرية للطيران</td>
-        </tr>
-        <tr>
-            <td>خطوط الطيران الكندية</td>
-            <td>Air Canada</td>
-        </tr>
-        <tr>
-            <td>رقم رحلة المغادرة</td>
-            <td>EGY 4610484477</td>
-        </tr>
-        <tr>
-            <td>وقت الوصول</td>
-            <td>10:00AM</td>
-        </tr>
-        <tr>
-            <td>مدة الرحلة</td>
-            <td>نصف يوم وثلاث ساعات</td>
-        </tr>
-        <tr>
-            <td>الانطلاق</td>
-            <td>مطار القاهرة الدولي</td>
-        </tr>
-        <tr>
-            <td>الاستقبال</td>
-            <td>مطار مونتريال</td>
-        </tr>
-        <tr>
-            <td>المستقبل</td>
-            <td>المفوضية السامية لشؤون اللاجئين في كندا</td>
-        </tr>
-        <tr>
-            <td>الفندق</td>
-            <td>هيلتون جاردن مونتريال كندا</td>
-        </tr>
-        <tr>
-            <td>جهة الاتصال الرئيسية</td>
-            <td>+201145691406</td>
-        </tr>
-    </table>
-</div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("searchBtn").addEventListener("click", function () {
-            let code = document.getElementById("case").value;
-            let errorMsg = document.getElementById("errorMsg");
-            let resultTable = document.getElementById("resultTable");
-    
-            errorMsg.style.display = "none"; // إخفاء رسالة الخطأ
-            resultTable.style.display = "none"; // إخفاء الجدول
-    
-            fetch("/api/search", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                },
-                body: JSON.stringify({ code: code })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    resultTable.style.display = "table"; // إظهار الجدول إذا كان الكود صحيحًا
-                } else {
-                    errorMsg.textContent = "  لا يوجد نتيجه "; // عرض رسالة خطأ
-                    errorMsg.style.display = "block";
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                errorMsg.textContent = "حدث خطأ أثناء الاتصال بالخادم";
-                errorMsg.style.display = "block";
+
+        {{-- <div class="message-box">نص ساررسله لإضافته مع صورة</div> --}}
+
+        <table id="resultTable" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" style="display: none">
+            <thead>
+                <tr>
+                    <th>{{ __('messages.program') }}</th>
+                    <th>{{ __('messages.resettlement_canada') }}</th>
+                </tr>
+            </thead>
+            <tr>
+                <td> {{ __('messages.desc') }}</td>
+                <td>إعادة التوطين</td>
+            </tr>
+            <tr>
+                <td>طول الرحلة</td>
+                <td>15 ساعة</td>
+            </tr>
+            <tr>
+                <td>تاريخ المغادرة</td>
+                <td>27-03-1441</td>
+            </tr>
+            <tr>
+                <td>شركة الطيران المغادرة</td>
+                <td>المصرية للطيران</td>
+            </tr>
+            <tr>
+                <td>خطوط الطيران الكندية</td>
+                <td>Air Canada</td>
+            </tr>
+            <tr>
+                <td>رقم رحلة المغادرة</td>
+                <td>EGY 4610484477</td>
+            </tr>
+            <tr>
+                <td>وقت الوصول</td>
+                <td>10:00AM</td>
+            </tr>
+            <tr>
+                <td>مدة الرحلة</td>
+                <td>نصف يوم وثلاث ساعات</td>
+            </tr>
+            <tr>
+                <td>الانطلاق</td>
+                <td>مطار القاهرة الدولي</td>
+            </tr>
+            <tr>
+                <td>الاستقبال</td>
+                <td>مطار مونتريال</td>
+            </tr>
+            <tr>
+                <td>المستقبل</td>
+                <td>المفوضية السامية لشؤون اللاجئين في كندا</td>
+            </tr>
+            <tr>
+                <td>الفندق</td>
+                <td>هيلتون جاردن مونتريال كندا</td>
+            </tr>
+            <tr>
+                <td>جهة الاتصال الرئيسية</td>
+                <td>+201145691406</td>
+            </tr>
+            <tr>
+                <td>المرافقون</td>
+                <td>+201145691406</td>
+            </tr>
+        </table>
+    </div>
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchBtn").addEventListener("click", function() {
+                let code = document.getElementById("case").value;
+                let errorMsg = document.getElementById("errorMsg");
+                let resultTable = document.getElementById("resultTable");
+
+                errorMsg.style.display = "none"; // إخفاء رسالة الخطأ
+                resultTable.style.display = "none"; // إخفاء الجدول
+
+                fetch("/api/search", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute("content")
+                        },
+                        body: JSON.stringify({
+                            code: code
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            resultTable.style.display = "table"; // إظهار الجدول إذا كان الكود صحيحًا
+                        } else {
+                            errorMsg.textContent = "  لا يوجد نتيجه "; // عرض رسالة خطأ
+                            errorMsg.style.display = "block";
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        errorMsg.textContent = "حدث خطأ أثناء الاتصال بالخادم";
+                        errorMsg.style.display = "block";
+                    });
             });
         });
-    });
+    </script> --}}
+
+    <script>
+        var translations = {
+            desc: "{{ __('messages.desc') }}",
+            long: "{{ __('messages.long') }}",
+            canada: "{{ __('messages.canada') }}",
+            date: "{{ __('messages.date') }}",
+            company: "{{ __('messages.company') }}",
+            number: "{{ __('messages.number') }}",
+            arrival: "{{ __('messages.arrival') }}",
+            duration: "{{ __('messages.duration') }}",
+            from: "{{ __('messages.from') }}",
+            to: "{{ __('messages.to') }}",
+            receiver: "{{ __('messages.receiver') }}",
+            hotel: "{{ __('messages.hotel') }}",
+            contact: "{{ __('messages.contact') }}",
+            companions: "{{ __('messages.companions') }}"
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchBtn").addEventListener("click", function() {
+                let code = document.getElementById("case").value;
+                let errorMsg = document.getElementById("errorMsg");
+                let resultTable = document.getElementById("resultTable");
+                let tableBody = resultTable.querySelector("tbody");
+
+                errorMsg.style.display = "none"; // إخفاء رسالة الخطأ
+                resultTable.style.display = "none"; // إخفاء الجدول
+                tableBody.innerHTML = ""; // مسح أي بيانات سابقة
+
+                fetch("/api/search", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute("content")
+                        },
+                        body: JSON.stringify({
+                            code: code
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            let details = data.data; // البيانات المسترجعة
+
+                            // إضافة البيانات إلى الجدول ديناميكيًا
+                            let rows = [
+                                [translations.desc, details.desc],
+                                [translations.long, details.long + " ساعة"],
+                                [translations.date, details.date],
+                                [translations.company, details.company],
+                                [translations.canada, details.canada],
+                                [translations.number, details.number],
+                                [translations.arrival, details.Arrival],
+                                [translations.duration,
+                                    "نصف يوم وثلاث ساعات"
+                                ], // يمكنك استبدالها ببيانات ديناميكية
+                                [translations.from, details.from],
+                                [translations.to, details.to],
+                                [translations.receiver, details.Receiver],
+                                [translations.hotel, details.hotel],
+                                [translations.contact, details.contact],
+                                [translations.companions, details.companions]
+                            ];
+
+                            rows.forEach(row => {
+                                let tr = document.createElement("tr");
+                                tr.innerHTML = `<td>${row[0]}</td>
+    <td>${row[1]}</td>`;
+                                tableBody.appendChild(tr);
+                            });
+
+                            resultTable.style.display = "table"; // إظهار الجدول بعد ملئه
+                        } else {
+                            errorMsg.textContent = "لا يوجد نتيجة";
+                            errorMsg.style.display = "block";
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        errorMsg.textContent = "حدث خطأ أثناء الاتصال بالخادم";
+                        errorMsg.style.display = "block";
+                    });
+            });
+        });
     </script>
-    
+
 </body>
 
 </html>
-
-
