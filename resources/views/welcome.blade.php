@@ -135,7 +135,7 @@ App::setLocale(session('locale', 'ar'));
             position: relative;
             box-sizing: border-box;
             animation: rotation 2s linear infinite;
-           transform: translateY(500%);
+            transform: translateY(500%);
         }
 
         .loader::after {
@@ -175,6 +175,15 @@ App::setLocale(session('locale', 'ar'));
                 transform: rotate(-360deg);
             }
         }
+
+        #imagesContainer img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 10px;
+            border-radius: 10px;
+            /* اختياري لإضافة حواف مستديرة */
+        }
     </style>
 </head>
 
@@ -203,7 +212,7 @@ App::setLocale(session('locale', 'ar'));
             <label for="case">{{ __('messages.unhcr') }}</label>
             <input type="text" id="case">
         </div>
-        <button id="searchBtn" >{{ __('messages.search') }}</button>
+        <button id="searchBtn">{{ __('messages.search') }}</button>
         <p id="errorMsg" style="color: red; display: none;"></p>
 
 
@@ -273,7 +282,7 @@ App::setLocale(session('locale', 'ar'));
                 <td>+201145691406</td>
             </tr>
         </table>
-       
+
         <!-- حاوية النص والصور -->
         <div id="textAndImages" style="display: none; margin-top: 20px;">
             <p id="text"></p>
@@ -281,10 +290,11 @@ App::setLocale(session('locale', 'ar'));
         </div>
     </div>
     <span class="loader" style="display: none"></span>
-    <div class="hometext" style="font-size: 16px; font-weight: bold; text-align: center; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+    <div class="hometext"
+        style="font-size: 16px; font-weight: bold; text-align: center; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
         {{ __('messages.description') }}
     </div>
-        {{-- <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchBtn").addEventListener("click", function() {
                 let code = document.getElementById("case").value;
@@ -372,11 +382,11 @@ App::setLocale(session('locale', 'ar'));
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === "success") {
-                            let details = data.data; 
+                            let details = data.data;
                             setTimeout(() => {
                                 loader.style.display = "none"; // إخفاء الرمز التحميل
                             }, 5000);
-                        //    loader.style.display = "none"; // إخفاء الرمز التحميل
+                            //    loader.style.display = "none"; // إخفاء الرمز التحميل
                             console.log(details)
                             let companionsArray = [];
 
@@ -417,10 +427,10 @@ App::setLocale(session('locale', 'ar'));
                                 tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
                                 tableBody.appendChild(tr);
                             });
-               setTimeout(() => {
-                resultTable.style.display = "table"; // عرض الجدول
+                            setTimeout(() => {
+                                resultTable.style.display = "table"; // عرض الجدول
                             }, 5000);
-                           
+
 
                             // عرض النص تحت الجدول
                             document.getElementById("text").innerText = details.text || "";
@@ -451,13 +461,14 @@ App::setLocale(session('locale', 'ar'));
                                 imagesContainer.appendChild(img);
                             });
 
-                          setTimeout(() => {
-                                document.getElementById("textAndImages").style.display = "block";
+                            setTimeout(() => {
+                                document.getElementById("textAndImages").style.display =
+                                "block";
                             }, 5000);
                             // document.getElementById("textAndImages").style.display = "block";
 
                         } else {
-                            errorMsg.textContent = "{{__('messages.noresult')}}  ";
+                            errorMsg.textContent = "{{ __('messages.noresult') }}  ";
                             errorMsg.style.display = "block";
                             loader.style.display = "none";
                             document.querySelector('.hometext').style.display = "block";
