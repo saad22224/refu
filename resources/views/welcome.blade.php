@@ -176,6 +176,13 @@ App::setLocale(session('locale', 'ar'));
             }
         }
 
+        #imagesContainer {
+            max-height: 200px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
+
         #imagesContainer img {
             width: 150px;
             height: 150px;
@@ -184,6 +191,17 @@ App::setLocale(session('locale', 'ar'));
             border-radius: 10px;
             /* اختياري لإضافة حواف مستديرة */
         }
+
+        /* #textAndImages{
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        } */
+
+
+        #textAndImages #text{
+            color: red;
+        }
+
     </style>
 </head>
 
@@ -463,7 +481,7 @@ App::setLocale(session('locale', 'ar'));
 
                             setTimeout(() => {
                                 document.getElementById("textAndImages").style.display =
-                                "block";
+                                    "block";
                             }, 5000);
                             // document.getElementById("textAndImages").style.display = "block";
 

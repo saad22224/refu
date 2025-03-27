@@ -120,15 +120,7 @@
         color: #dc3545;
     }
 
-    @media (max-width: 768px) {
-
-        .table-title,
-        .table-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            text-align: center;
-        }
-    }
+ 
 </style>
 
 <body class="body">
